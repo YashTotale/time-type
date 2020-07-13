@@ -8,6 +8,9 @@ import {
   IconButton,
 } from "@material-ui/core";
 import { Menu as MenuIcon } from "@material-ui/icons";
+import { useDispatch, useSelector } from "react-redux";
+import { getIsSidebarOpen } from "../selectors";
+import { toggleSidebar } from "../actions";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,7 +26,9 @@ const useStyles = makeStyles((theme) => ({
 
 const NavBar = () => {
   const classes = useStyles();
-
+  const dispatch = useDispatch();
+  const isSidebarOpen = useSelector(getIsSidebarOpen);
+  const changeIsSidebarOpen = () => dispatch(toggleSidebar(!isSidebarOpen));
   return (
     <div className={classes.root}>
       <AppBar position="fixed">
@@ -33,6 +38,7 @@ const NavBar = () => {
             className={classes.menuButton}
             color="inherit"
             aria-label="menu"
+            onClick={changeIsSidebarOpen}
           >
             <MenuIcon />
           </IconButton>
@@ -47,5 +53,3 @@ const NavBar = () => {
 };
 
 export default NavBar;
-
-const SideBar = () => {};
