@@ -30,14 +30,9 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
-    "@babel/preset-typescript": "^7.10.4",
     "@babel/runtime": "^7.10.4",
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
-    "@types/jest": "^26.0.4",
-    "@types/node": "^14.0.22",
-    "@types/react-dom": "^16.9.8",
-    "@types/react-redux": "^7.1.9",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",
@@ -45,7 +40,6 @@
     "redux-devtools-extension": "^2.13.8",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.3.0",
-    "reselect": "^4.0.0",
-    "typescript": "^3.9.6"
+    "reselect": "^4.0.0"
   }
 }
