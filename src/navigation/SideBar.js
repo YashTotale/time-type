@@ -16,13 +16,23 @@ import {
   ListItemIcon,
   Divider,
   ListItemText,
+  Toolbar,
 } from "@material-ui/core";
-import { Inbox as InboxIcon, Mail as MailIcon } from "@material-ui/icons";
+import { Inbox, Mail, EmojiEvents } from "@material-ui/icons";
+
+const drawerWidth = 240;
 
 //Style Creator
 const useSideBarStyles = makeStyles((theme) => ({
-  list: {
-    width: 250,
+  drawer: {
+    width: 240,
+    flexShrink: 0,
+  },
+  drawerPaper: {
+    width: 240,
+  },
+  drawerContainer: {
+    overflow: "auto",
   },
 }));
 
@@ -33,33 +43,31 @@ const SideBar = ({}) => {
   const changeIsSidebarOpen = () => dispatch(toggleSidebar(false));
   return (
     <>
-      <Drawer anchor="left" open={isSidebarOpen} onClose={changeIsSidebarOpen}>
-        <div
-          className={classes.list}
-          role="presentation"
-          onClick={changeIsSidebarOpen}
-          onKeyDown={changeIsSidebarOpen}
-        >
+      <Drawer
+        className={classes.drawer}
+        variant="permanent"
+        classes={{
+          paper: classes.drawerPaper,
+        }}
+      >
+        <Toolbar />
+        <div className={classes.drawerContainer}>
           <List>
-            {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            ))}
+            <ListItem button>
+              <ListItemIcon>
+                <EmojiEvents />
+              </ListItemIcon>
+              <ListItemText primary="Leaderboards" />
+            </ListItem>
           </List>
           <Divider />
           <List>
-            {["All mail", "Trash", "Spam"].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            ))}
+            <ListItem button>
+              <ListItemIcon>
+                <Mail />
+              </ListItemIcon>
+              <ListItemText primary="Contact Us" />
+            </ListItem>
           </List>
         </div>
       </Drawer>

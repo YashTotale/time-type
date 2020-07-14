@@ -1,15 +1,22 @@
 import React from "react";
 import { hot } from "react-hot-loader";
-import Button from "@material-ui/core/Button";
 import NavBar from "./navigation/NavBar";
 import SideBar from "./navigation/SideBar";
+import { makeStyles } from "@material-ui/core";
+
+const useAppStyles = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+  },
+}));
 
 const App = () => {
+  const classes = useAppStyles();
   return (
-    <>
-      <SideBar></SideBar>
+    <div className={classes.root}>
       <NavBar></NavBar>
-    </>
+      <SideBar></SideBar>
+    </div>
   );
 };
 
