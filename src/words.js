@@ -747,7 +747,6 @@ const words = [
   "set",
   "settle",
   "seven",
-  "sex",
   "shall",
   "share",
   "she",
@@ -2168,5 +2167,5 @@ const words = [
 export default words;
 
 export const getWords = (amount) => {
-  return _.sampleSize(words, amount);
+  return _.join(_.sampleSize(words, amount), " ");
 };
