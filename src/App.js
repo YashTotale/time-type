@@ -1,12 +1,15 @@
 import React from "react";
 import { hot } from "react-hot-loader";
-import NavBar from "./navigation/NavBar";
-import SideBar from "./navigation/SideBar";
+import NavBar from "./components/navigation/NavBar";
+import SideBar from "./components/navigation/SideBar";
 import { makeStyles } from "@material-ui/core";
+import TypingInput from "./components/typing/TypingInput";
 
 const useAppStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
+    width: "100%",
+    height: "100%",
   },
 }));
 
@@ -16,6 +19,7 @@ const App = () => {
     <div className={classes.root}>
       <NavBar></NavBar>
       <SideBar></SideBar>
+      <TypingInput></TypingInput>
     </div>
   );
 };
