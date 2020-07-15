@@ -27,37 +27,52 @@ const useNavBarStyles = makeStyles((theme) => ({
 }));
 
 const NavBar = ({}) => {
-  //Dispatch
-  const dispatch = useDispatch();
-  const changeIsSidebarOpen = () => dispatch(toggleSidebar(!isSidebarOpen));
   //Styles & Theme
   const classes = useNavBarStyles();
   const theme = useTheme();
   //Variables
   const isSizeSmall = useMediaQuery(theme.breakpoints.down("sm"));
-  const isSidebarOpen = useSelector(getIsSidebarOpen);
   return (
     <div id="NavBar">
       <AppBar className={classes.appBar} position="fixed">
         <Toolbar>
-          {isSizeSmall ? (
-            <IconButton
-              edge="start"
-              className={classes.menuButton}
-              color="inherit"
-              aria-label="menu"
-              onClick={changeIsSidebarOpen}
-            >
-              {isSidebarOpen ? <MenuOpen /> : <Menu />}
-            </IconButton>
-          ) : null}
-          <Typography variant="h6" className={classes.title}>
-            {document.title}
-          </Typography>
+          {isSizeSmall ? <MenuButton /> : null}
+          <Title />
           <Button color="inherit">Login</Button>
         </Toolbar>
       </AppBar>
     </div>
+  );
+};
+
+const MenuButton = () => {
+  //Dispatch
+  const dispatch = useDispatch();
+  const changeIsSidebarOpen = () => dispatch(toggleSidebar(!isSidebarOpen));
+  //Styles
+  const classes = useNavBarStyles();
+  //Variables
+  const isSidebarOpen = useSelector(getIsSidebarOpen);
+  return (
+    <IconButton
+      edge="start"
+      className={classes.menuButton}
+      color="inherit"
+      aria-label="menu"
+      onClick={changeIsSidebarOpen}
+    >
+      {isSidebarOpen ? <MenuOpen /> : <Menu />}
+    </IconButton>
+  );
+};
+
+const Title = () => {
+  //Styles
+  const classes = useNavBarStyles();
+  return (
+    <Typography variant="h6" className={classes.title}>
+      {document.title}
+    </Typography>
   );
 };
 

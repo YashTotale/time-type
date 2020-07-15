@@ -19,6 +19,9 @@ const useTypingInputStyles = makeStyles((theme) => ({
     margin: "auto",
     width: "50%",
   },
+  typingPaper: {
+    marginTop: "64px",
+  },
 }));
 
 const TypingInput = ({}) => {
@@ -28,8 +31,8 @@ const TypingInput = ({}) => {
   return (
     <>
       <div className={classes.typingInput} id="TypingInput">
-        <Paper variant="outlined" elevation={3}>
-          <Typography align="center">
+        <Paper className={classes.typingPaper} variant="outlined" elevation={3}>
+          <Typography variant="h6" align="center">
             Provost boatswain American Main driver poop deck crimp scurvy fore
             broadside gunwalls. Hempen halter yardarm skysail pressgang port
             bowsprit log mutiny Gold Road hail-shot. Heave down dead men tell no
