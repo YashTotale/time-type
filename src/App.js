@@ -4,7 +4,7 @@ import NavBar from "./components/navigation/NavBar";
 import SideBar from "./components/navigation/SideBar";
 import { makeStyles } from "@material-ui/core";
 import TypingInput from "./components/typing/Typer";
-import words, { handleTypingInputChange } from "./words";
+import words, { mapCharacters } from "./words";
 
 const useAppStyles = makeStyles((theme) => ({
   root: {

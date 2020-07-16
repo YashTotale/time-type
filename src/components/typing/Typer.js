@@ -1,11 +1,11 @@
 // React Imports
-import React from "react";
+import React, { useState } from "react";
 
 // Redux Imports
 import { useDispatch, useSelector } from "react-redux";
 
 import { getWordList, getCurrentWord } from "../../selectors";
-import { setWordList } from "../../actions";
+import { setWordList, handleInputChange } from "../../actions";
 
 // Material UI Imports
 import { makeStyles } from "@material-ui/core/styles";
@@ -81,7 +81,7 @@ const Word = ({ word, currentWord }) => {
           <Character
             key={i}
             character={characterObject.char}
-            isCorrect={characterObject.isCorrect}
+            userCharacter={characterObject.userChar}
           />
         );
       })}
@@ -89,15 +89,26 @@ const Word = ({ word, currentWord }) => {
   );
 };
 
-const Character = ({ character, isCorrect }) => {
-  const isUnattempted = isCorrect === null;
-  const isWrong = isCorrect === false;
+const Character = ({ character, userCharacter }) => {
+  const isUnattempted = userCharacter === null;
+  const isWrong = userCharacter && userCharacter !== character;
+  const isCorrect = userCharacter === character;
   const classes = useTyperStyles({ isCorrect, isWrong, isUnattempted });
   return <div className={classes.character}>{character}</div>;
 };
 
 const TypingInput = ({}) => {
   const classes = useTyperStyles();
+  const dispatch = useDispatch();
+  const [inputValue, setInputValue] = useState("");
+  const handleInputValueChange = (e) => {
+    if (e.target.value.slice(-1) === " ") {
+      setInputValue("");
+    } else {
+      setInputValue(e.target.value);
+    }
+    dispatch(handleInputChange(e.target.value));
+  };
   return (
     <TextField
       autoComplete="off"
@@ -108,7 +119,8 @@ const TypingInput = ({}) => {
       label="Type Here..."
       variant="outlined"
       className={classes.typingInput}
-      // onChange={handleInputChange}
+      value={inputValue}
+      onChange={handleInputValueChange}
     />
   );
 };
