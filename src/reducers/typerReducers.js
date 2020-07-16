@@ -3,7 +3,6 @@ import { getWords } from "../words";
 
 const initialTyperState = {
   wordList: getWords(100),
-  userInputWordList: [],
   currentWord: 0,
 };
 

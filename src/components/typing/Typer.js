@@ -80,8 +80,8 @@ const Word = ({ word, currentWord }) => {
         return (
           <Character
             key={i}
-            character={characterObject.character}
-            isCorrect={characterObject.correct}
+            character={characterObject.char}
+            isCorrect={characterObject.isCorrect}
           />
         );
       })}
