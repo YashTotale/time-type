@@ -2969,13 +2969,6 @@ const words = [
   [
     { character: "h", correct: null },
     { character: "u", correct: null },
-    { character: "l", correct: null },
-    { character: "l", correct: null },
-    { character: "o", correct: null },
-  ],
-  [
-    { character: "h", correct: null },
-    { character: "u", correct: null },
     { character: "n", correct: null },
     { character: "d", correct: null },
     { character: "r", correct: null },
@@ -16523,4 +16516,26 @@ export default words;
 
 export const getWords = (amount) => {
   return _.sampleSize(words, amount);
+};
+
+export const findWord = (search) => {
+  let returnVal;
+  words.some((word) => {
+    if (search.length === word.length) {
+      let matchesSearch = true;
+      word.some((character, i) => {
+        let characterName = character.character;
+        if (search.charAt(i) !== characterName) {
+          matchesSearch = false;
+          return true;
+        }
+      });
+      if (matchesSearch) {
+        returnVal = word;
+        return true;
+      }
+    }
+    return false;
+  });
+  return returnVal;
 };

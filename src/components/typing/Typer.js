@@ -2,14 +2,10 @@
 import React from "react";
 
 // Redux Imports
-import { useDispatch, useSelector, shallowEqual } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-import {
-  getWordList,
-  getCurrentWord,
-  getUserInputWordList,
-} from "../../selectors";
-import { setWordList, handleInputChange } from "../../actions";
+import { getWordList, getCurrentWord } from "../../selectors";
+import { setWordList } from "../../actions";
 
 // Material UI Imports
 import { makeStyles } from "@material-ui/core/styles";
@@ -47,7 +43,7 @@ const useTyperStyles = makeStyles((theme) => ({
     lineHeight: 1.5,
   }),
   character: (props) => ({
-    color: props.currentCharacter ? "blue" : "black",
+    color: props.isCorrect ? "green" : props.isUnattempted ? "black" : "red",
     minWidth: "5px",
   }),
 }));
@@ -57,10 +53,6 @@ const Typer = ({}) => {
   const classes = useTyperStyles();
   //Variables
   const wordList = useSelector(getWordList);
-  const userInputWordList = useSelector(
-    getUserInputWordList,
-    (left, right) => false
-  );
   const currentWord = useSelector(getCurrentWord);
   return (
     <>
@@ -69,33 +61,24 @@ const Typer = ({}) => {
           <div className={classes.words}>
             {wordList.map((word, i) => {
               return (
-                <Word
-                  key={i}
-                  word={word}
-                  userInputWord={userInputWordList[i]}
-                  currentWord={i === currentWord}
-                />
+                <Word key={i} word={word} currentWord={i === currentWord} />
               );
             })}
           </div>
-          <TypingInput
-            userInputWordList={userInputWordList}
-            currentWord={currentWord}
-          />
+          <TypingInput currentWord={currentWord} />
         </Paper>
       </div>
     </>
   );
 };
 
-const Word = ({ word, currentWord, userInputWord = [] }) => {
+const Word = ({ word, currentWord }) => {
   const classes = useTyperStyles({ currentWord });
   return (
     <div className={classes.word}>
       {word.map((characterObject, i) => {
         return (
           <Character
-            userInputCharacter={userInputWord[i]}
             key={i}
             character={characterObject.character}
             isCorrect={characterObject.correct}
@@ -106,23 +89,15 @@ const Word = ({ word, currentWord, userInputWord = [] }) => {
   );
 };
 
-const Character = ({ character, userInputCharacter, isCorrect }) => {
+const Character = ({ character, isCorrect }) => {
   const isUnattempted = isCorrect === null;
   const isWrong = isCorrect === false;
-  const classes = useTyperStyles();
+  const classes = useTyperStyles({ isCorrect, isWrong, isUnattempted });
   return <div className={classes.character}>{character}</div>;
 };
 
-const TypingInput = ({ userInputWordList = [], currentWord = 0 }) => {
-  //Dispatch
-  const dispatch = useDispatch();
-  const handleTypingInputChange = (e) =>
-    dispatch(handleInputChange(e.target.value));
-  //Styles
+const TypingInput = ({}) => {
   const classes = useTyperStyles();
-  const currentValue = userInputWordList[currentWord]
-    ? userInputWordList[currentWord].join("")
-    : "";
   return (
     <TextField
       autoComplete="off"
@@ -133,8 +108,7 @@ const TypingInput = ({ userInputWordList = [], currentWord = 0 }) => {
       label="Type Here..."
       variant="outlined"
       className={classes.typingInput}
-      onChange={handleTypingInputChange}
-      value={currentValue}
+      // onChange={handleInputChange}
     />
   );
 };
