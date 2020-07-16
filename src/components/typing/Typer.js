@@ -61,7 +61,6 @@ const Typer = ({}) => {
     getUserInputWordList,
     (left, right) => false
   );
-  console.log(userInputWordList);
   const currentWord = useSelector(getCurrentWord);
   return (
     <>
@@ -93,12 +92,13 @@ const Word = ({ word, currentWord, userInputWord = [] }) => {
   const classes = useTyperStyles({ currentWord });
   return (
     <div className={classes.word}>
-      {word.map((character, i) => {
+      {word.map((characterObject, i) => {
         return (
           <Character
             userInputCharacter={userInputWord[i]}
             key={i}
-            character={character}
+            character={characterObject.character}
+            isCorrect={characterObject.correct}
           />
         );
       })}
@@ -106,7 +106,9 @@ const Word = ({ word, currentWord, userInputWord = [] }) => {
   );
 };
 
-const Character = ({ character, userInputCharacter }) => {
+const Character = ({ character, userInputCharacter, isCorrect }) => {
+  const isUnattempted = isCorrect === null;
+  const isWrong = isCorrect === false;
   const classes = useTyperStyles();
   return <div className={classes.character}>{character}</div>;
 };
