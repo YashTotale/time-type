@@ -1,28 +1,28 @@
 // React Imports
-import React, { useEffect, useState, useRef } from "react";
+import React from "react";
 
 // Redux Imports
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector, shallowEqual } from "react-redux";
 
 import {
   getWordList,
   getCurrentWord,
-  getCurrentCharacter,
+  getUserInputWordList,
 } from "../../selectors";
-import { setWordList, setCurrentWord } from "../../actions";
+import { setWordList, handleInputChange } from "../../actions";
 
 // Material UI Imports
 import { makeStyles } from "@material-ui/core/styles";
 import { Paper, TextField, Typography } from "@material-ui/core";
 import {} from "@material-ui/icons";
-import { setCurrentCharacter } from "../../actions/typerActions";
 
 // Style Creator
 const useTyperStyles = makeStyles((theme) => ({
   typer: {
     alignSelf: "center",
     margin: "auto",
-    width: "50%",
+    minWidth: "50%",
+    maxWidth: "960px",
   },
   typingPaper: {
     marginTop: "64px",
@@ -40,29 +40,29 @@ const useTyperStyles = makeStyles((theme) => ({
     flexWrap: "wrap",
   },
   word: (props) => ({
-    color: props.currentWord ? "red" : "black",
+    color: "black",
     display: "flex",
     margin: "3px",
     fontSize: 20,
     lineHeight: 1.5,
   }),
-  character: {
+  character: (props) => ({
+    color: props.currentCharacter ? "blue" : "black",
     minWidth: "5px",
-  },
+  }),
 }));
 
 const Typer = ({}) => {
   //Styles
   const classes = useTyperStyles();
-  //Dispatch
-  const dispatch = useDispatch();
-  const changeCurrentWord = (word) => dispatch(setCurrentWord(word));
-  const changeCurrentCharacter = (character) =>
-    dispatch(setCurrentCharacter(character));
   //Variables
   const wordList = useSelector(getWordList);
+  const userInputWordList = useSelector(
+    getUserInputWordList,
+    (left, right) => false
+  );
+  console.log(userInputWordList);
   const currentWord = useSelector(getCurrentWord);
-  const currentCharacter = useSelector(getCurrentCharacter);
   return (
     <>
       <div className={classes.typer} id="typer">
@@ -73,20 +73,15 @@ const Typer = ({}) => {
                 <Word
                   key={i}
                   word={word}
-                  currentCharacter={currentCharacter}
+                  userInputWord={userInputWordList[i]}
                   currentWord={i === currentWord}
                 />
               );
             })}
           </div>
-          <TextField
-            size="small"
-            fullWidth
-            autoFocus
-            id="typingInput"
-            label="Type Here..."
-            variant="outlined"
-            className={classes.typingInput}
+          <TypingInput
+            userInputWordList={userInputWordList}
+            currentWord={currentWord}
           />
         </Paper>
       </div>
@@ -94,27 +89,52 @@ const Typer = ({}) => {
   );
 };
 
-const Word = ({ word, currentWord, currentCharacter }) => {
+const Word = ({ word, currentWord, userInputWord = [] }) => {
   const classes = useTyperStyles({ currentWord });
   return (
     <div className={classes.word}>
-      {[...word].map((character, i) => {
+      {word.map((character, i) => {
         return (
           <Character
+            userInputCharacter={userInputWord[i]}
             key={i}
-            currentCharacter={currentWord && i === currentCharacter}
             character={character}
           />
         );
       })}
-      <Character character={" "} />
     </div>
   );
 };
 
-const Character = ({ character }) => {
+const Character = ({ character, userInputCharacter }) => {
   const classes = useTyperStyles();
   return <div className={classes.character}>{character}</div>;
+};
+
+const TypingInput = ({ userInputWordList = [], currentWord = 0 }) => {
+  //Dispatch
+  const dispatch = useDispatch();
+  const handleTypingInputChange = (e) =>
+    dispatch(handleInputChange(e.target.value));
+  //Styles
+  const classes = useTyperStyles();
+  const currentValue = userInputWordList[currentWord]
+    ? userInputWordList[currentWord].join("")
+    : "";
+  return (
+    <TextField
+      autoComplete="off"
+      size="small"
+      fullWidth
+      autoFocus
+      id="typingInput"
+      label="Type Here..."
+      variant="outlined"
+      className={classes.typingInput}
+      onChange={handleTypingInputChange}
+      value={currentValue}
+    />
+  );
 };
 
 export default Typer;

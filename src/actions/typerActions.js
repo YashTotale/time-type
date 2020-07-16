@@ -4,14 +4,10 @@ export const setWordList = (wordList) => ({
   payload: { wordList },
 });
 
-export const SET_CURRENT_WORD = "SET_CURRENT_WORD";
-export const setCurrentWord = (currentWord) => ({
-  type: SET_CURRENT_WORD,
-  payload: { currentWord },
+export const HANDLE_INPUT_CHANGE = "HANDLE_INPUT_CHANGE";
+export const handleInputChange = (inputValue) => ({
+  type: HANDLE_INPUT_CHANGE,
+  payload: { inputValue },
 });
 
-export const SET_CURRENT_CHARACTER = "SET_CURRENT_CHARACTER";
-export const setCurrentCharacter = (currentCharacter) => ({
-  type: SET_CURRENT_CHARACTER,
-  payload: { currentCharacter },
-});
+export const SET_USER_INPUT_WORD_LIST = "SET_USER_INPUT_WORD_LIST";
