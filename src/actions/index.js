@@ -1,5 +1,7 @@
-export const TOGGLE_SIDEBAR = "TOGGLE_SIDEBAR";
-export const toggleSidebar = (shouldOpenSidebar) => ({
-  type: TOGGLE_SIDEBAR,
-  payload: { shouldOpenSidebar },
-});
+export { TOGGLE_SIDEBAR, toggleSidebar } from "./sidebarActions";
+export {
+  SET_CURRENT_WORD,
+  setCurrentWord,
+  SET_WORD_LIST,
+  setWordList,
+} from "./typerActions";

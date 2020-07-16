@@ -20,6 +20,7 @@
     "@babel/register": "^7.10.4",
     "babel-loader": "^8.1.0",
     "chai": "^4.2.0",
+    "eslint-plugin-react-hooks": "^4.0.8",
     "fetch-mock": "^9.10.3",
     "mocha": "^8.0.1",
     "node-fetch": "^2.6.0",

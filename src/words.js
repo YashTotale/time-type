@@ -2167,5 +2167,5 @@ const words = [
 export default words;
 
 export const getWords = (amount) => {
-  return _.join(_.sampleSize(words, amount), " ");
+  return _.sampleSize(words, amount);
 };
