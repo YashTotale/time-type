@@ -9,3 +9,9 @@ export const handleInputChange = (input) => ({
   type: HANDLE_INPUT_CHANGE,
   payload: { input },
 });
+
+export const SET_NEW_DIFFICULTY = "SET_NEW_DIFFICULTY";
+export const setNewDifficulty = (difficulty) => ({
+  type: SET_NEW_DIFFICULTY,
+  payload: { difficulty },
+});
