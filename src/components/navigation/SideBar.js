@@ -3,7 +3,6 @@ import React from "react";
 
 // Redux Imports
 import { useDispatch, useSelector } from "react-redux";
-
 import { getIsSidebarOpen } from "../../selectors";
 import { toggleSidebar } from "../../actions";
 
@@ -20,9 +19,7 @@ import {
   useMediaQuery,
   useTheme,
 } from "@material-ui/core";
-import { Inbox, Mail, EmojiEvents } from "@material-ui/icons";
-
-const drawerWidth = 240;
+import { Mail, EmojiEvents } from "@material-ui/icons";
 
 //Style Creator
 const useSideBarStyles = makeStyles((theme) => ({
@@ -39,13 +36,13 @@ const useSideBarStyles = makeStyles((theme) => ({
 }));
 
 const SideBar = ({}) => {
+  //Styles
+  const classes = useSideBarStyles();
+  const theme = useTheme();
   //Dispatch
   const dispatch = useDispatch();
   const changeIsSidebarOpen = () =>
     isSizeSmall ? dispatch(toggleSidebar(false)) : null;
-  //Styles and Theme
-  const classes = useSideBarStyles();
-  const theme = useTheme();
   //Variables
   const isSizeSmall = useMediaQuery(theme.breakpoints.down("sm"));
   const isSidebarOpen = useSelector(getIsSidebarOpen);

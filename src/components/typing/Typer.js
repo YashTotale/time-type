@@ -1,5 +1,5 @@
 // React Imports
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Word from "./Word";
 import TyperInput from "./TyperInput";
 
@@ -7,16 +7,13 @@ import TyperInput from "./TyperInput";
 import { useDispatch, useSelector } from "react-redux";
 
 import { getWordList, getCurrentWord, getDifficulty } from "../../selectors";
-import {
-  setWordList,
-  handleInputChange,
-  setNewDifficulty,
-} from "../../actions";
+import { setNewDifficulty } from "../../actions";
 
 // Material UI Imports
 import { makeStyles } from "@material-ui/core/styles";
 import { Paper, TextField, Tabs, Tab } from "@material-ui/core";
 import {} from "@material-ui/icons";
+import { getWordsRequest } from "../../thunks";
 
 // Style Creator
 const useTyperStyles = makeStyles((theme) => ({
@@ -39,6 +36,9 @@ const useTyperStyles = makeStyles((theme) => ({
 const Typer = ({}) => {
   //Dispatch
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getWordsRequest());
+  }, []);
   const newDifficulty = (event, newValue) =>
     dispatch(setNewDifficulty(newValue));
   //Styles

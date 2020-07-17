@@ -1,9 +1,16 @@
-export { TOGGLE_SIDEBAR, toggleSidebar } from "./sidebarActions";
+export { TOGGLE_SIDEBAR } from "./sidebarActions";
+export { toggleSidebar } from "./sidebarActions";
 export {
-  SET_WORD_LIST,
-  setWordList,
   HANDLE_INPUT_CHANGE,
+  SET_NEW_DIFFICULTY,
+  LOAD_WORDS_IN_PROGRESS,
+  LOAD_WORDS_FAILURE,
+  LOAD_WORDS_SUCCESS,
+} from "./typerActions";
+export {
   handleInputChange,
   setNewDifficulty,
-  SET_NEW_DIFFICULTY,
+  loadWordsInProgress,
+  loadWordsSuccess,
+  loadWordsFailure,
 } from "./typerActions";

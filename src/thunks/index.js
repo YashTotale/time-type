@@ -1,15 +1,20 @@
-import { useDispatch } from "react-redux";
-import {} from "../actions";
+import {
+  loadWordsInProgress,
+  loadWordsSuccess,
+  loadWordsFailure,
+} from "../actions";
 
-export const getWordsRequest = () => async () => {
-  const dispatch = useDispatch();
+export const getWordsRequest = () => async (dispatch) => {
   try {
     dispatch(loadWordsInProgress());
-    const response = await fetch("http://localhost:3004/words");
+    const response = await fetch(
+      "http://localhost:3004/words?_start=721&_end=821"
+    );
     const words = await response.json();
 
-    dispatch(loadWordsSuccess());
+    dispatch(loadWordsSuccess(words));
   } catch (e) {
-    dispatch(loadWordsFailure());
+    console.log(e);
+    dispatch(loadWordsFailure(e));
   }
 };

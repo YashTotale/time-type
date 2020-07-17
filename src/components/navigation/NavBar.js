@@ -1,4 +1,12 @@
-import React, { useRef, useEffect } from "react";
+//React Imports
+import React from "react";
+
+//Redux Imports
+import { useDispatch, useSelector } from "react-redux";
+import { getIsSidebarOpen } from "../../selectors";
+import { toggleSidebar } from "../../actions";
+
+//Material UI Imports
 import { makeStyles } from "@material-ui/core/styles";
 import {
   AppBar,
@@ -10,9 +18,6 @@ import {
   useMediaQuery,
 } from "@material-ui/core";
 import { Menu, MenuOpen } from "@material-ui/icons";
-import { useDispatch, useSelector } from "react-redux";
-import { getIsSidebarOpen } from "../../selectors";
-import { toggleSidebar } from "../../actions";
 
 const useNavBarStyles = makeStyles((theme) => ({
   appBar: {
@@ -27,7 +32,7 @@ const useNavBarStyles = makeStyles((theme) => ({
 }));
 
 const NavBar = ({}) => {
-  //Styles & Theme
+  //Styles
   const classes = useNavBarStyles();
   const theme = useTheme();
   //Variables
@@ -46,11 +51,11 @@ const NavBar = ({}) => {
 };
 
 const MenuButton = () => {
+  //Styles
+  const classes = useNavBarStyles();
   //Dispatch
   const dispatch = useDispatch();
   const changeIsSidebarOpen = () => dispatch(toggleSidebar(!isSidebarOpen));
-  //Styles
-  const classes = useNavBarStyles();
   //Variables
   const isSidebarOpen = useSelector(getIsSidebarOpen);
   return (

@@ -1,24 +1,23 @@
 import {
-  SET_WORD_LIST,
   HANDLE_INPUT_CHANGE,
   SET_NEW_DIFFICULTY,
+  LOAD_WORDS_IN_PROGRESS,
+  LOAD_WORDS_SUCCESS,
+  LOAD_WORDS_FAILURE,
 } from "../actions";
-import { getWordList } from "../words";
 import { changeWord } from "../words";
 
 const initialTyperState = {
-  wordList: getWordList(100, 0),
+  wordList: [],
   currentWord: 0,
   difficulty: 0,
+  isLoading: false,
+  isError: false,
 };
 
 export const typer = (state = initialTyperState, action) => {
   const { type, payload } = action;
   switch (type) {
-    case SET_WORD_LIST: {
-      const { wordList } = payload;
-      return { ...state, wordList };
-    }
     case HANDLE_INPUT_CHANGE: {
       const { input } = payload;
       const newWordList = [...state.wordList];
@@ -35,9 +34,19 @@ export const typer = (state = initialTyperState, action) => {
       return {
         ...state,
         difficulty,
-        wordList: getWordList(100, difficulty),
         currentWord: 0,
       };
+    }
+    case LOAD_WORDS_IN_PROGRESS: {
+      return { ...state, isLoading: true };
+    }
+    case LOAD_WORDS_SUCCESS: {
+      const { words } = payload;
+      return { ...state, isLoading: false, wordList: words };
+    }
+    case LOAD_WORDS_FAILURE: {
+      const { error } = payload;
+      return { ...state, isLoading: false, isError: error };
     }
     default:
       return state;
