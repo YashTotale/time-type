@@ -1,21 +1,20 @@
 // React Imports
-import React, { useState, useEffect } from "react";
-import Word from "./Word";
+import React, { useEffect } from "react";
+import TyperWord from "./TyperWord";
 import TyperInput from "./TyperInput";
 
 // Redux Imports
 import { useDispatch, useSelector } from "react-redux";
-
 import { getWordList, getCurrentWord, getDifficulty } from "../../selectors";
-import { setNewDifficulty } from "../../actions";
+import {} from "../../actions";
+import { getWordsRequest } from "../../thunks";
 
 // Material UI Imports
 import { makeStyles } from "@material-ui/core/styles";
-import { Paper, TextField, Tabs, Tab } from "@material-ui/core";
+import { Paper, Tabs, Tab } from "@material-ui/core";
 import {} from "@material-ui/icons";
-import { getWordsRequest } from "../../thunks";
+import TyperTabs from "./TyperTabs";
 
-// Style Creator
 const useTyperStyles = makeStyles((theme) => ({
   typer: {
     alignSelf: "center",
@@ -34,32 +33,30 @@ const useTyperStyles = makeStyles((theme) => ({
 }));
 
 const Typer = ({}) => {
-  //Dispatch
-  const dispatch = useDispatch();
+  //Effects
   useEffect(() => {
     dispatch(getWordsRequest());
   }, []);
-  const newDifficulty = (event, newValue) =>
-    dispatch(setNewDifficulty(newValue));
   //Styles
   const classes = useTyperStyles();
+  //Dispatch
+  const dispatch = useDispatch();
   //Variables
   const wordList = useSelector(getWordList);
   const currentWord = useSelector(getCurrentWord);
-  const difficulty = useSelector(getDifficulty);
   return (
     <>
       <div className={classes.typer} id="typer">
         <Paper className={classes.typingPaper} variant="outlined" elevation={3}>
-          <Tabs value={difficulty} onChange={newDifficulty} centered>
-            <Tab label="Easy"></Tab>
-            <Tab label="Medium"></Tab>
-            <Tab label="Hard"></Tab>
-          </Tabs>
+          <TyperTabs />
           <div className={classes.words}>
             {wordList.map((word, i) => {
               return (
-                <Word key={i} word={word} currentWord={i === currentWord} />
+                <TyperWord
+                  key={i}
+                  word={word}
+                  currentWord={i === currentWord}
+                />
               );
             })}
           </div>

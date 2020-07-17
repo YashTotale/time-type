@@ -12,7 +12,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import { TextField } from "@material-ui/core";
 import {} from "@material-ui/icons";
 
-// Style Creator
 const useTyperInputStyles = makeStyles((theme) => ({
   typingInput: {
     "& .MuiOutlinedInput-root": {
@@ -24,9 +23,13 @@ const useTyperInputStyles = makeStyles((theme) => ({
 }));
 
 const TyperInput = ({}) => {
+  //Styles
   const classes = useTyperInputStyles();
+  //Dispatch
   const dispatch = useDispatch();
+  //Variables
   const [inputValue, setInputValue] = useState("");
+  //Functions
   const handleInputValueChange = (e) => {
     if (e.target.value.slice(-1) === " ") {
       setInputValue("");

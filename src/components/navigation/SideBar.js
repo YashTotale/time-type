@@ -21,7 +21,6 @@ import {
 } from "@material-ui/core";
 import { Mail, EmojiEvents } from "@material-ui/icons";
 
-//Style Creator
 const useSideBarStyles = makeStyles((theme) => ({
   drawer: {
     width: 240,

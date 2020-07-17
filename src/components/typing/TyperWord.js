@@ -13,7 +13,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import {} from "@material-ui/core";
 import {} from "@material-ui/icons";
 
-const useWordStyles = makeStyles((theme) => ({
+const useTyperWordStyles = makeStyles((theme) => ({
   word: (props) => ({
     color: "black",
     display: "flex",
@@ -27,8 +27,9 @@ const useWordStyles = makeStyles((theme) => ({
   }),
 }));
 
-const Word = ({ word, currentWord }) => {
-  const classes = useWordStyles({ currentWord });
+const TyperWord = ({ word, currentWord }) => {
+  //Styles
+  const classes = useTyperWordStyles({ currentWord });
   return (
     <div className={classes.word}>
       {word.map((characterObject, i) => {
@@ -50,9 +51,8 @@ const Character = ({ character, userCharacter }) => {
   const isWrong = userCharacter && userCharacter !== character;
   const isCorrect = userCharacter === character;
   //Styles
-  const classes = useWordStyles({ isCorrect, isWrong, isUnattempted });
-  //Variables
+  const classes = useTyperWordStyles({ isCorrect, isWrong, isUnattempted });
   return <div className={classes.character}>{character}</div>;
 };
 
-export default Word;
+export default TyperWord;
