@@ -41,8 +41,7 @@ const SideBar = ({}) => {
   const theme = useTheme();
   //Dispatch
   const dispatch = useDispatch();
-  const changeIsSidebarOpen = () =>
-    isSizeSmall ? dispatch(toggleSidebar(false)) : null;
+  const changeIsSidebarOpen = () => dispatch(toggleSidebar(false));
   //Variables
   const isSizeSmall = useMediaQuery(theme.breakpoints.down("sm"));
   const isSidebarOpen = useSelector(getIsSidebarOpen);
@@ -53,35 +52,46 @@ const SideBar = ({}) => {
           className={classes.drawer}
           open={isSidebarOpen}
           variant={isSizeSmall ? "temporary" : "permanent"}
-          onClick={changeIsSidebarOpen}
-          onKeyDown={changeIsSidebarOpen}
+          onClick={isSizeSmall ? changeIsSidebarOpen : null}
+          onKeyDown={isSizeSmall ? changeIsSidebarOpen : null}
           classes={{
             paper: classes.drawerPaper,
           }}
         >
           {isSizeSmall ? null : <Toolbar />}
-          <div className={classes.drawerContainer}>
-            <List>
-              <ListItem button>
-                <ListItemIcon>
-                  <EmojiEvents />
-                </ListItemIcon>
-                <ListItemText primary="Leaderboards" />
-              </ListItem>
-            </List>
-            <Divider />
-            <List>
-              <ListItem button>
-                <ListItemIcon>
-                  <Mail />
-                </ListItemIcon>
-                <ListItemText primary="Contact Us" />
-              </ListItem>
-            </List>
-          </div>
+          <SideBarContainer />
         </Drawer>
       </div>
     </>
+  );
+};
+
+const SideBarContainer = ({}) => {
+  //Styles
+  const classes = useSideBarStyles();
+  return (
+    <div className={classes.drawerContainer}>
+      <SideBarList
+        listItems={[{ text: "Leaderboards", icon: <EmojiEvents /> }]}
+      />
+      <Divider />
+      <SideBarList listItems={[{ text: "Contact Us", icon: <Mail /> }]} />
+    </div>
+  );
+};
+
+const SideBarList = ({ listItems }) => {
+  return (
+    <List>
+      {listItems.map((listItem, i) => {
+        return (
+          <ListItem key={i} button>
+            <ListItemIcon>{listItem.icon}</ListItemIcon>
+            <ListItemText primary={listItem.text} />
+          </ListItem>
+        );
+      })}
+    </List>
   );
 };
 
