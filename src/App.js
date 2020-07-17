@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { hot } from "react-hot-loader";
 import NavBar from "./components/navigation/NavBar";
 import SideBar from "./components/navigation/SideBar";
 import { makeStyles } from "@material-ui/core";
-import TypingInput from "./components/typing/Typer";
+import Typer from "./components/typing/Typer";
 import words, { mapCharacters } from "./words";
 
 const useAppStyles = makeStyles((theme) => ({
@@ -20,7 +21,14 @@ const App = () => {
     <div className={classes.root}>
       <NavBar></NavBar>
       <SideBar></SideBar>
-      <TypingInput></TypingInput>
+      <Router>
+        <Switch>
+          <Route path="/leaderboards"></Route>
+          <Route path="/">
+            <Typer />
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 };

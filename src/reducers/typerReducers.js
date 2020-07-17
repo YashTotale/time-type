@@ -1,10 +1,13 @@
-import { SET_WORD_LIST, HANDLE_INPUT_CHANGE } from "../actions";
-import { getWords } from "../words";
+import {
+  SET_WORD_LIST,
+  HANDLE_INPUT_CHANGE,
+  SET_NEW_DIFFICULTY,
+} from "../actions";
+import { getWordList } from "../words";
 import { changeWord } from "../words";
-import { SET_NEW_DIFFICULTY } from "../actions/typerActions";
 
 const initialTyperState = {
-  wordList: getWords(100, 0),
+  wordList: getWordList(100, 0),
   currentWord: 0,
   difficulty: 0,
 };
@@ -32,7 +35,7 @@ export const typer = (state = initialTyperState, action) => {
       return {
         ...state,
         difficulty,
-        wordList: getWords(100, difficulty),
+        wordList: getWordList(100, difficulty),
         currentWord: 0,
       };
     }

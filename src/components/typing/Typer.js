@@ -1,18 +1,22 @@
 // React Imports
 import React, { useState } from "react";
 import Word from "./Word";
+import TyperInput from "./TyperInput";
 
 // Redux Imports
 import { useDispatch, useSelector } from "react-redux";
 
 import { getWordList, getCurrentWord, getDifficulty } from "../../selectors";
-import { setWordList, handleInputChange } from "../../actions";
+import {
+  setWordList,
+  handleInputChange,
+  setNewDifficulty,
+} from "../../actions";
 
 // Material UI Imports
 import { makeStyles } from "@material-ui/core/styles";
 import { Paper, TextField, Tabs, Tab } from "@material-ui/core";
 import {} from "@material-ui/icons";
-import { setNewDifficulty } from "../../actions/typerActions";
 
 // Style Creator
 const useTyperStyles = makeStyles((theme) => ({
@@ -24,13 +28,6 @@ const useTyperStyles = makeStyles((theme) => ({
   },
   typingPaper: {
     marginTop: "64px",
-  },
-  typingInput: {
-    "& .MuiOutlinedInput-root": {
-      "& input": {
-        textAlign: "center",
-      },
-    },
   },
   words: {
     margin: "0px 10px 10px",
@@ -66,38 +63,10 @@ const Typer = ({}) => {
               );
             })}
           </div>
-          <TypingInput currentWord={currentWord} />
+          <TyperInput currentWord={currentWord} />
         </Paper>
       </div>
     </>
-  );
-};
-
-const TypingInput = ({}) => {
-  const classes = useTyperStyles();
-  const dispatch = useDispatch();
-  const [inputValue, setInputValue] = useState("");
-  const handleInputValueChange = (e) => {
-    if (e.target.value.slice(-1) === " ") {
-      setInputValue("");
-    } else {
-      setInputValue(e.target.value);
-    }
-    dispatch(handleInputChange(e.target.value));
-  };
-  return (
-    <TextField
-      autoComplete="off"
-      size="small"
-      fullWidth
-      autoFocus
-      id="typingInput"
-      label="Type Here..."
-      variant="outlined"
-      className={classes.typingInput}
-      value={inputValue}
-      onChange={handleInputValueChange}
-    />
   );
 };
 

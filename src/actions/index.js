@@ -4,4 +4,6 @@ export {
   setWordList,
   HANDLE_INPUT_CHANGE,
   handleInputChange,
+  setNewDifficulty,
+  SET_NEW_DIFFICULTY,
 } from "./typerActions";
