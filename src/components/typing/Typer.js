@@ -5,13 +5,14 @@ import Word from "./Word";
 // Redux Imports
 import { useDispatch, useSelector } from "react-redux";
 
-import { getWordList, getCurrentWord } from "../../selectors";
+import { getWordList, getCurrentWord, getDifficulty } from "../../selectors";
 import { setWordList, handleInputChange } from "../../actions";
 
 // Material UI Imports
 import { makeStyles } from "@material-ui/core/styles";
 import { Paper, TextField, Tabs, Tab } from "@material-ui/core";
 import {} from "@material-ui/icons";
+import { setNewDifficulty } from "../../actions/typerActions";
 
 // Style Creator
 const useTyperStyles = makeStyles((theme) => ({
@@ -39,20 +40,25 @@ const useTyperStyles = makeStyles((theme) => ({
 }));
 
 const Typer = ({}) => {
+  //Dispatch
+  const dispatch = useDispatch();
+  const newDifficulty = (event, newValue) =>
+    dispatch(setNewDifficulty(newValue));
   //Styles
   const classes = useTyperStyles();
   //Variables
   const wordList = useSelector(getWordList);
   const currentWord = useSelector(getCurrentWord);
+  const difficulty = useSelector(getDifficulty);
   return (
     <>
       <div className={classes.typer} id="typer">
         <Paper className={classes.typingPaper} variant="outlined" elevation={3}>
-          {/* <Tabs centered>
+          <Tabs value={difficulty} onChange={newDifficulty} centered>
             <Tab label="Easy"></Tab>
             <Tab label="Medium"></Tab>
             <Tab label="Hard"></Tab>
-          </Tabs> */}
+          </Tabs>
           <div className={classes.words}>
             {wordList.map((word, i) => {
               return (
