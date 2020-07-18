@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "npx webpack-dev-server --mode development",
     "build": "npx webpack --mode development",
-    "test": "mocha \"src/tests/**/*.test.js\" --require @babel/register --recursive"
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
@@ -19,10 +19,9 @@
     "@babel/preset-react": "^7.10.4",
     "@babel/register": "^7.10.4",
     "babel-loader": "^8.1.0",
-    "chai": "^4.2.0",
     "eslint-plugin-react-hooks": "^4.0.8",
     "fetch-mock": "^9.10.3",
-    "mocha": "^8.0.1",
+    "jest": "^26.1.0",
     "node-fetch": "^2.6.0",
     "react-hot-loader": "^4.12.21",
     "sinon": "^9.0.2",

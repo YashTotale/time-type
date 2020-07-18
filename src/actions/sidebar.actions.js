@@ -1,5 +1,5 @@
 export const TOGGLE_SIDEBAR = "TOGGLE_SIDEBAR";
-export const toggleSidebar = (shouldOpenSidebar) => ({
+export const toggleSidebar = (isSidebarOpen) => ({
   type: TOGGLE_SIDEBAR,
-  payload: { shouldOpenSidebar },
+  payload: { isSidebarOpen },
 });

@@ -1,4 +1,3 @@
-import { expect } from "chai";
 import sinon from "sinon";
 import { getWords } from "../../thunks";
 import "node-fetch";
@@ -10,7 +9,7 @@ import {
 } from "../../actions";
 
 describe("The getWords thunk", () => {
-  it("Dispatches the correct actions on success", async () => {
+  test("Dispatches the correct actions on success", async () => {
     const fakeDispatch = sinon.spy();
 
     const fakeWords = [
@@ -27,18 +26,19 @@ describe("The getWords thunk", () => {
 
     await getWords()(fakeDispatch);
 
-    expect(fakeDispatch.getCall(0).args[0]).to.deep.equal(expectedFirstAction);
-    expect(fakeDispatch.getCall(1).args[0]).to.deep.equal(expectedSecondAction);
+    expect(fakeDispatch.getCall(0).args[0]).toEqual(expectedFirstAction);
+    expect(fakeDispatch.getCall(1).args[0]).toEqual(expectedSecondAction);
 
     fetchMock.reset();
   });
 
-  it("Dispatches the correct actions on failure", async () => {
+  test("Dispatches the correct actions on failure", async () => {
     const fakeDispatch = sinon.spy();
 
-    fetchMock.get("http://localhost:3004/words?_start=721&_end=821", () => {
-      return Promise.reject("Sample Error");
-    });
+    fetchMock.get(
+      "http://localhost:3004/words?_start=721&_end=821",
+      Promise.reject("Sample Error")
+    );
 
     const expectedFirstAction = { type: LOAD_WORDS_IN_PROGRESS };
     const expectedSecondAction = {
@@ -48,8 +48,8 @@ describe("The getWords thunk", () => {
 
     await getWords()(fakeDispatch);
 
-    expect(fakeDispatch.getCall(0).args[0]).to.deep.equal(expectedFirstAction);
-    expect(fakeDispatch.getCall(1).args[0]).to.deep.equal(expectedSecondAction);
+    expect(fakeDispatch.getCall(0).args[0]).toEqual(expectedFirstAction);
+    expect(fakeDispatch.getCall(1).args[0]).toEqual(expectedSecondAction);
 
     fetchMock.reset();
   });

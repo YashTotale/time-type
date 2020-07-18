@@ -1,4 +1,3 @@
-import { expect } from "chai";
 import {
   LOAD_WORDS_IN_PROGRESS,
   LOAD_WORDS_FAILURE,
@@ -30,14 +29,14 @@ const originalState = {
 };
 
 describe("The typer reducer", () => {
-  it("Sets isLoading to true when LOAD_WORDS_IN_PROGRESS action is recieved", () => {
+  test("Sets isLoading to true when LOAD_WORDS_IN_PROGRESS action is recieved", () => {
     const fakeAction = { type: LOAD_WORDS_IN_PROGRESS };
     const expected = { ...originalState, isLoading: true };
     const actual = typer(originalState, fakeAction);
-    expect(actual).to.deep.equal(expected);
+    expect(actual).toEqual(expected);
   });
 
-  it("Sets isLoading to false and isError to the error when LOAD_WORDS_FAILURE action is recieved", () => {
+  test("Sets isLoading to false and isError to the error when LOAD_WORDS_FAILURE action is recieved", () => {
     const fakeAction = {
       type: LOAD_WORDS_FAILURE,
       payload: { error: "This is the error" },
@@ -49,10 +48,10 @@ describe("The typer reducer", () => {
       isError: "This is the error",
     };
     const actual = typer(initialState, fakeAction);
-    expect(actual).to.deep.equal(expected);
+    expect(actual).toEqual(expected);
   });
 
-  it("Sets isLoading to false and wordList to the words when LOAD_WORDS_FAILURE action is recieved", () => {
+  test("Sets isLoading to false and wordList to the words when LOAD_WORDS_FAILURE action is recieved", () => {
     const fakeAction = {
       type: LOAD_WORDS_SUCCESS,
       payload: { wordList: [[{ char: "h", isCorrect: null }]] },
@@ -64,6 +63,6 @@ describe("The typer reducer", () => {
       wordList: [[{ char: "h", isCorrect: null }]],
     };
     const actual = typer(initialState, fakeAction);
-    expect(actual).to.deep.equal(expected);
+    expect(actual).toEqual(expected);
   });
 });
