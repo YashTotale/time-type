@@ -4,15 +4,15 @@ import {
   loadWordsFailure,
 } from "../actions";
 
-export const getWordsRequest = () => async (dispatch) => {
+export const getWords = () => async (dispatch) => {
   try {
     dispatch(loadWordsInProgress());
     const response = await fetch(
       "http://localhost:3004/words?_start=721&_end=821"
     );
-    const words = await response.json();
+    const wordList = await response.json();
 
-    dispatch(loadWordsSuccess(words));
+    dispatch(loadWordsSuccess(wordList));
   } catch (e) {
     console.log(e);
     dispatch(loadWordsFailure(e));

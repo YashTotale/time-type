@@ -13,7 +13,7 @@ import {
   getIsTyperError,
 } from "../../selectors";
 import {} from "../../actions";
-import { getWordsRequest } from "../../thunks";
+import { getWords } from "../../thunks";
 
 // Material UI Imports
 import { makeStyles } from "@material-ui/core/styles";
@@ -47,7 +47,7 @@ const useTyperStyles = makeStyles((theme) => ({
 const Typer = ({}) => {
   //Effects
   useEffect(() => {
-    dispatch(getWordsRequest());
+    dispatch(getWords());
   }, []);
   //Styles
   const classes = useTyperStyles();

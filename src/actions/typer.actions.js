@@ -16,9 +16,9 @@ export const loadWordsInProgress = () => ({
 });
 
 export const LOAD_WORDS_SUCCESS = "LOAD_WORDS_SUCCESS";
-export const loadWordsSuccess = (words) => ({
+export const loadWordsSuccess = (wordList) => ({
   type: LOAD_WORDS_SUCCESS,
-  payload: { words },
+  payload: { wordList },
 });
 
 export const LOAD_WORDS_FAILURE = "LOAD_WORDS_FAILURE";

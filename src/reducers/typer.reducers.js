@@ -41,8 +41,8 @@ export const typer = (state = initialTyperState, action) => {
       return { ...state, isLoading: true };
     }
     case LOAD_WORDS_SUCCESS: {
-      const { words } = payload;
-      return { ...state, isLoading: false, wordList: words };
+      const { wordList } = payload;
+      return { ...state, isLoading: false, wordList };
     }
     case LOAD_WORDS_FAILURE: {
       const { error } = payload;

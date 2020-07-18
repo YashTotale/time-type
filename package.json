@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "npx webpack-dev-server --mode development",
     "build": "npx webpack --mode development",
-    "test": "mocha \"src/**/*.test.js\" --require @babel/register --recursive"
+    "test": "mocha \"src/tests/**/*.test.js\" --require @babel/register --recursive"
   },
   "keywords": [],
   "author": "",

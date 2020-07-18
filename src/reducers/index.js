@@ -1,2 +1,2 @@
-export { isSidebarOpen } from "./sidebarReducers";
-export { typer } from "./typerReducers";
+export { isSidebarOpen } from "./sidebar.reducers";
+export { typer } from "./typer.reducers";
