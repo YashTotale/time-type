@@ -26,8 +26,8 @@ describe("The getWords thunk", () => {
 
     await getWords()(fakeDispatch);
 
-    expect(fakeDispatch.getCall(0).args[0]).toEqual(expectedFirstAction);
-    expect(fakeDispatch.getCall(1).args[0]).toEqual(expectedSecondAction);
+    expect(fakeDispatch.firstCall.args[0]).toEqual(expectedFirstAction);
+    expect(fakeDispatch.secondCall.args[0]).toEqual(expectedSecondAction);
 
     fetchMock.reset();
   });

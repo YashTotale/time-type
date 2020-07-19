@@ -71,17 +71,28 @@ const Typer = ({}) => {
               <TyperTabs />
             )}
           </div>
-          <div className={classes.words}>
-            {wordList.map((word, i) => {
-              return (
-                <TyperWord
-                  key={i}
-                  word={word}
-                  currentWord={i === currentWord}
-                />
-              );
-            })}
-          </div>
+          {isLoading ? (
+            <div className={classes.wordsSkeleton}>
+              <Skeleton height="36px"></Skeleton>
+              <Skeleton height="36px"></Skeleton>
+              <Skeleton height="36px"></Skeleton>
+              <Skeleton height="36px"></Skeleton>
+              <Skeleton height="36px"></Skeleton>
+            </div>
+          ) : (
+            <div className={classes.words}>
+              {wordList.map((word, i) => {
+                return (
+                  <TyperWord
+                    key={i}
+                    word={word}
+                    currentWord={i === currentWord}
+                  />
+                );
+              })}
+            </div>
+          )}
+
           {isLoading ? (
             <Skeleton width="100%" variant="rect">
               <TyperInput />

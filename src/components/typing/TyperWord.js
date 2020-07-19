@@ -18,7 +18,7 @@ const useTyperWordStyles = makeStyles((theme) => ({
     color: "black",
     display: "flex",
     margin: "3px",
-    fontSize: 20,
+    fontSize: 28,
     lineHeight: 1.5,
   }),
   character: (props) => ({

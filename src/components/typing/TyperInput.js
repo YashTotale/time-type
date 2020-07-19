@@ -41,7 +41,6 @@ const TyperInput = ({}) => {
   return (
     <TextField
       autoComplete="off"
-      size="small"
       fullWidth
       autoFocus
       id="typingInput"

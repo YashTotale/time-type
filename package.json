@@ -1,12 +1,20 @@
 {
   "name": "TimedType",
+  "jest": {
+    "verbose": true,
+    "silent": true,
+    "testRegex": "(/__tests__/.js|(\\.|/)(test|spec))\\.js?$"
+  },
   "version": "1.0.0",
   "description": "",
   "main": "index.tsx",
   "scripts": {
     "dev": "npx webpack-dev-server --mode development",
     "build": "npx webpack --mode development",
-    "test": "jest"
+    "test": "jest ./__tests__",
+    "test:selectors": "jest ./__tests__/selectors",
+    "test:reducers": "jest ./__tests__/reducers",
+    "test:thunks": "jest ./__tests__/thunks"
   },
   "keywords": [],
   "author": "",
