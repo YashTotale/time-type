@@ -19,7 +19,8 @@ import {
   useMediaQuery,
   useTheme,
 } from "@material-ui/core";
-import { Mail, EmojiEvents } from "@material-ui/icons";
+import { Mail, EmojiEvents, Home } from "@material-ui/icons";
+import { Link } from "react-router-dom";
 
 const useSideBarStyles = makeStyles((theme) => ({
   drawer: {
@@ -71,7 +72,10 @@ const SideBarContainer = ({}) => {
   return (
     <div className={classes.drawerContainer}>
       <SideBarList
-        listItems={[{ text: "Leaderboards", icon: <EmojiEvents /> }]}
+        listItems={[
+          { text: "Home", icon: <Home />, to: "/" },
+          { text: "Leaderboards", icon: <EmojiEvents />, to: "/leaderboards" },
+        ]}
       />
       <Divider />
       <SideBarList listItems={[{ text: "Contact Us", icon: <Mail /> }]} />
@@ -83,10 +87,11 @@ const SideBarList = ({ listItems }) => {
   return (
     <List>
       {listItems.map((listItem, i) => {
+        const { icon, text, to } = listItem;
         return (
-          <ListItem key={i} button>
-            <ListItemIcon>{listItem.icon}</ListItemIcon>
-            <ListItemText primary={listItem.text} />
+          <ListItem component={Link} to={to} key={i} button>
+            <ListItemIcon>{icon}</ListItemIcon>
+            <ListItemText primary={text} />
           </ListItem>
         );
       })}

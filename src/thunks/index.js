@@ -4,7 +4,7 @@ import {
   loadWordsFailure,
 } from "../actions";
 
-export const getWords = () => async (dispatch) => {
+export const getWords = () => async (dispatch, getState) => {
   try {
     dispatch(loadWordsInProgress());
     const response = await fetch(

@@ -3,9 +3,10 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { hot } from "react-hot-loader";
 import NavBar from "./components/navigation/NavBar";
 import SideBar from "./components/navigation/SideBar";
-import { makeStyles } from "@material-ui/core";
+import { makeStyles, IconButton } from "@material-ui/core";
 import Typer from "./components/typing/Typer";
-import words, { mapCharacters } from "./words";
+import { useFirebase } from "react-redux-firebase";
+import Login from "./components/login/Login";
 
 const useAppStyles = makeStyles((theme) => ({
   root: {
@@ -19,11 +20,14 @@ const App = () => {
   const classes = useAppStyles();
   return (
     <div className={classes.root}>
-      <NavBar></NavBar>
-      <SideBar></SideBar>
       <Router>
+        <NavBar></NavBar>
+        <SideBar></SideBar>
         <Switch>
           <Route path="/leaderboards"></Route>
+          <Route path="/login">
+            <Login />
+          </Route>
           <Route path="/">
             <Typer />
           </Route>

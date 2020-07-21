@@ -17,7 +17,7 @@ import { getWords } from "../../thunks";
 
 // Material UI Imports
 import { makeStyles } from "@material-ui/core/styles";
-import { Paper, Tabs, Tab } from "@material-ui/core";
+import { Paper, Tabs, Tab, IconButton, SvgIcon } from "@material-ui/core";
 import { Skeleton } from "@material-ui/lab";
 import {} from "@material-ui/icons";
 import TyperTabs from "./TyperTabs";

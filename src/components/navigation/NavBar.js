@@ -1,5 +1,6 @@
 //React Imports
 import React from "react";
+import { Link } from "react-router-dom";
 
 //Redux Imports
 import { useDispatch, useSelector } from "react-redux";
@@ -43,7 +44,9 @@ const NavBar = ({}) => {
         <Toolbar>
           {isSizeSmall ? <MenuButton /> : null}
           <Title />
-          <Button color="inherit">Login</Button>
+          <Button component={Link} to="/login" color="inherit">
+            Login
+          </Button>
         </Toolbar>
       </AppBar>
     </div>
