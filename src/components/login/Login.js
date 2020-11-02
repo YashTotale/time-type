@@ -9,10 +9,17 @@ import {} from "../../actions";
 
 // Material UI Imports
 import { makeStyles } from "@material-ui/core/styles";
-import {} from "@material-ui/core";
+import { Paper } from "@material-ui/core";
 import {} from "@material-ui/icons";
+import Icons from "./Icons";
 
 const useLoginStyles = makeStyles((theme) => ({
+  login: {
+    margin: "auto",
+  },
+  loginPaper: {
+    marginTop: "64px",
+  },
   // Styles
 }));
 
@@ -24,7 +31,14 @@ const Login = ({}) => {
   // Variables
   return (
     <>
-      <h1 style={{ margin: "auto" }}>Hello</h1>
+      <div className={classes.login} id="login">
+        <Paper className={classes.loginPaper}>
+          <div style={{ margin: "auto" }}>
+            <h1>Hello</h1>
+            <Icons />
+          </div>
+        </Paper>
+      </div>
     </>
   );
 };

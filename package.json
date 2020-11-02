@@ -1,13 +1,18 @@
 {
-  "name": "TimedType",
+  "name": "time-type",
+  "displayName": "Time Type",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YashTotale/time-type"
+  },
   "jest": {
     "verbose": true,
     "silent": true,
     "testRegex": "(/__tests__/.js|(\\.|/)(test|spec))\\.js?$"
   },
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.tsx",
   "scripts": {
     "dev": "npx webpack-dev-server --mode development",
     "build": "npx webpack --mode development",
@@ -17,7 +22,9 @@
     "test:thunks": "jest ./__tests__/thunks"
   },
   "keywords": [],
-  "author": "",
+  "author": {
+    "name": "Yash Totale"
+  },
   "license": "ISC",
   "devDependencies": {
     "@babel/cli": "^7.10.4",

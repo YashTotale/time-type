@@ -24,7 +24,6 @@ import TyperTabs from "./TyperTabs";
 
 const useTyperStyles = makeStyles((theme) => ({
   typer: {
-    alignSelf: "center",
     margin: "auto",
     minWidth: "50%",
     maxWidth: "960px",
@@ -61,7 +60,7 @@ const Typer = ({}) => {
   return (
     <>
       <div className={classes.typer} id="typer">
-        <Paper className={classes.typerPaper} variant="outlined" elevation={3}>
+        <Paper elevation={3} className={classes.typerPaper} variant="outlined">
           <div className={classes.typerTabs}>
             {isLoading ? (
               <Skeleton variant="rect">
